@@ -1,18 +1,18 @@
-#Kotlin Spark
+# Kotlin Spark
 
 Microservie to be written with spark framework and kotlin
 
-##Working endpoints:
+## Working endpoints:
 
-###Get
+### Get
 http://localhost:4567/user/id/<id>
 http://localhost:4567/user/all
 
-###Post
+### Post
 http://localhost:4567/user/create
 
-###Patch
+### Patch
 http://localhost:4567/user/update/<id>
 
-###Delete
+### Delete
 http://localhost:4567/userdelete/<id>
