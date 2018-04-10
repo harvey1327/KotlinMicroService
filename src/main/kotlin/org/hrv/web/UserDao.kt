@@ -13,6 +13,10 @@ class UserDao {
             3 to User(name = "Dave", email = "dave@dave.kt", id = 3)
     )
 
+    fun getAllUsers(): Map<Int, User>? {
+        return users
+    }
+
     fun post(name: String, email: String) {
         val id = AtomicInteger(users.size - 1).incrementAndGet()
         users.put(id, User(name = name, email = email, id = id))

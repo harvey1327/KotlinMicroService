@@ -13,6 +13,10 @@ fun main(args: Array<String>) {
         gson.toJson(user)
     }
 
+    get("/user/all") { req, res ->
+        val users = userDao.getAllUsers()
+        gson.toJson(users)
+    }
     post("/user/create") { req, res ->
         userDao.post(
                 name = req.queryParams("name"),
