@@ -12,10 +12,7 @@ buildscript {
 group 'com.hrv'
 version '1.0-SNAPSHOT'
 
-apply plugin: 'java'
 apply plugin: 'kotlin'
-
-sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
@@ -32,9 +29,10 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
 
-compileKotlin {
-    kotlinOptions.jvmTarget = "1.8"
-}
-compileTestKotlin {
-    kotlinOptions.jvmTarget = "1.8"
+jar {
+    manifest {
+        attributes 'Main-Class': 'org.hrv.web.SparkAppKt'
+    }
+
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
 }
