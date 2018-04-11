@@ -8,12 +8,12 @@ fun main(args: Array<String>) {
     val userDao = UserDao()
     val gson = Gson()
 
-    get("/user/id/:id") { req, res ->
+    get("/user/id/:id") { req, _ ->
         val user = userDao.getById(req.params("id").toInt())
         gson.toJson(user)
     }
 
-    get("/user/all") { req, res ->
+    get("/user/all") { _, _ ->
         val users = userDao.getAllUsers()
         gson.toJson(users)
     }
