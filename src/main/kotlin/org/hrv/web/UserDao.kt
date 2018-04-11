@@ -7,10 +7,10 @@ data class User(val name: String, val email: String, val id: Int)
 class UserDao {
 
     private val users = hashMapOf(
-            0 to User(name = "Alice", email = "alice@alice.kt", id = 0),
-            1 to User(name = "Bob", email = "bob@bob.kt", id = 1),
-            2 to User(name = "Carol", email = "carol@carol.kt", id = 2),
-            3 to User(name = "Dave", email = "dave@dave.kt", id = 3)
+            0 to User(name = "Alice", email = "test1@email.com", id = 0),
+            1 to User(name = "Bob", email = "test2@email.com", id = 1),
+            2 to User(name = "Carol", email = "test3@email.com", id = 2),
+            3 to User(name = "Dave", email = "test4@email.com", id = 3)
     )
 
     fun getAllUsers(): Map<Int, User>? {
