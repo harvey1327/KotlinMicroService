@@ -10,7 +10,7 @@ fun main(args: Array<String>) {
 
     get("/user/id/:id") { req, _ ->
         val user = userDao.getById(req.params("id").toInt())
-        gson.toJson(user)
+        if (user !=null) gson.toJson(user) else "{\"message\":\"User does not exist\"}"
     }
 
     get("/user/all") { _, _ ->
@@ -36,5 +36,9 @@ fun main(args: Array<String>) {
     delete("/user/delete/:id") { req, res ->
         userDao.delete(req.params("id").toInt())
         res.status(200)
+    }
+
+    notFound { _, _ ->
+        "{\"message\":\"Custom 404\"}"
     }
 }
