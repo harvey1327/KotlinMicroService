@@ -8,6 +8,14 @@ fun main(args: Array<String>) {
     val userDao = UserDao()
     val gson = Gson()
 
+    get("/testpost") {_, _ ->
+        PlsqlDAO().insertIntoTable()
+    }
+
+    get("/testselect") {_, _ ->
+        PlsqlDAO().getUser()
+    }
+
     get("/user/id/:id") { req, _ ->
         val user = userDao.getById(req.params("id").toInt())
         if (user !=null) gson.toJson(user) else "{\"message\":\"User does not exist\"}"

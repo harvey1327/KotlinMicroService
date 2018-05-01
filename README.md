@@ -16,3 +16,7 @@ http://localhost:4567/user/update/<id>
 
 ### Delete
 http://localhost:4567/userdelete/<id>
+
+##PostgreSQL
+
+docker run --name sparkdb -p 5432:5432 -d sparkdb

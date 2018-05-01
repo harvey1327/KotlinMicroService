@@ -23,6 +23,7 @@ sourceSets {
 }
 
 dependencies {
+    compile 'org.postgresql:postgresql:42.2.2'
     compile 'com.google.code.gson:gson:2.8.2'
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     compile 'com.sparkjava:spark-core:2.7.2'
