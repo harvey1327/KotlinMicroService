@@ -1,6 +1,7 @@
 package org.hrv.web
 
 import com.google.gson.Gson
+import org.hrv.web.dao.PlsqlDAO
 import spark.Spark.*
 
 fun main(args: Array<String>) {
@@ -13,7 +14,8 @@ fun main(args: Array<String>) {
     }
 
     get("/testselect") {_, _ ->
-        PlsqlDAO().getUser()
+        val user = PlsqlDAO().getUser()
+        gson.toJson(user)
     }
 
     get("/user/id/:id") { req, _ ->

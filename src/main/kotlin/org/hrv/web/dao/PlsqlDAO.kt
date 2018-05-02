@@ -1,10 +1,9 @@
-package org.hrv.web
+package org.hrv.web.dao
 
+import org.hrv.web.domain.User
 import java.sql.Connection
 import java.sql.DriverManager
 import java.util.*
-
-//data class User(val name: String, val email: String, val id: Int)
 
 class PlsqlDAO {
 
@@ -18,7 +17,7 @@ class PlsqlDAO {
         st.close()
     }
 
-    fun getUser():User? {
+    fun getUser(): User? {
         val conn = getConnection()
         val st = conn.createStatement()
         val rs = st.executeQuery("SELECT * FROM usertable")
@@ -33,7 +32,7 @@ class PlsqlDAO {
         return result
     }
 
-    private fun getConnection():Connection {
+    private fun getConnection(): Connection {
         val url = "jdbc:postgresql://localhost:5432/sparkservice"
         val props = Properties()
         props.setProperty("user", "sparkuser")

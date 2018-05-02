@@ -1,8 +1,7 @@
 package org.hrv.web
 
+import org.hrv.web.domain.User
 import java.util.concurrent.atomic.AtomicInteger
-
-data class User(val name: String, val email: String, val id: Int)
 
 class UserDao {
 
