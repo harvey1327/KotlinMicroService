@@ -1,6 +1,4 @@
-CREATE USER spark;
-CREATE DATABASE sparkdatabase;
-GRANT ALL PRIVILEGES ON DATABASE sparkdatabase TO spark;
+GRANT ALL PRIVILEGES ON DATABASE sparkservice TO sparkuser;
 CREATE TABLE usertable(
 user_id serial PRIMARY KEY,
 user_name VARCHAR (50) NOT NULL,

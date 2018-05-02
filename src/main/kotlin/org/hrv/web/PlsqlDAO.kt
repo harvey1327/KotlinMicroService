@@ -31,13 +31,12 @@ class PlsqlDAO {
             result = User(name = name, email = email, id = id)
         }
         return result
-
     }
 
     private fun getConnection():Connection {
-        val url = "jdbc:postgresql://localhost:5432/sparkdatabase"
+        val url = "jdbc:postgresql://localhost:5432/sparkservice"
         val props = Properties()
-        props.setProperty("user", "spark")
+        props.setProperty("user", "sparkuser")
         props.setProperty("password", "password")
         return DriverManager.getConnection(url, props)
     }
