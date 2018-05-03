@@ -16,6 +16,9 @@ apply plugin: 'kotlin'
 
 repositories {
     mavenCentral()
+    maven {
+        url  "https://dl.bintray.com/kotlin/exposed"
+    }
 }
 
 sourceSets {
@@ -23,6 +26,7 @@ sourceSets {
 }
 
 dependencies {
+    compile 'org.jetbrains.exposed:exposed:0.10.2'
     compile 'org.postgresql:postgresql:42.2.2'
     compile 'com.google.code.gson:gson:2.8.2'
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"

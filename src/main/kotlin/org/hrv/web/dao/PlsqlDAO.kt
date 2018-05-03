@@ -1,42 +1,70 @@
 package org.hrv.web.dao
 
-import org.hrv.web.domain.User
-import java.sql.Connection
-import java.sql.DriverManager
-import java.util.*
+import org.hrv.web.dao.domainDB.AccountDB
+import org.hrv.web.domain.Account
+import org.jetbrains.exposed.sql.Database
+import org.jetbrains.exposed.sql.StdOutSqlLogger
+import org.jetbrains.exposed.sql.transactions.transaction
+import org.jetbrains.exposed.sql.transactions.transactionScope
 
 class PlsqlDAO {
 
-    fun insertIntoTable() {
-        val conn = getConnection()
-        val st = conn.prepareStatement("INSERT INTO usertable (user_id, user_name, user_email) VALUES (?, ?, ?)")
-        st.setInt(1,1)
-        st.setString(2,"username")
-        st.setString(3, "emailAddesss")
-        st.executeUpdate()
-        st.close()
-    }
+    fun connection() = Database.connect(
+            url = "jdbc:postgresql://localhost:5432/sparkservice",
+            driver = "org.postgresql.Driver",
+            user = "sparkuser",
+            password = "password"
+    )
 
-    fun getUser(): User? {
-        val conn = getConnection()
-        val st = conn.createStatement()
-        val rs = st.executeQuery("SELECT * FROM usertable")
-        var result:User? = null
-        while(rs.next()){
-            val id = rs.getInt(1)
-            val name = rs.getString(2)
-            val email = rs.getString(3)
+//    fun insertAccount() {
+//        transaction {
+//            logger.addLogger(StdOutSqlLogger)
+//
+//            create (Accounts)
+//            AccountDB.new {
+//                name = "AccountOne"
+//            }
+//            AccountDB.new {
+//                name = "AccountTwo"
+//            }
+//
+//        }
+//    }
 
-            result = User(name = name, email = email, id = id)
+    fun createAccount(name: String) {
+        transaction {
+            logger.addLogger(StdOutSqlLogger)
+
+            AccountDB.new {
+                this.name = name
+            }
         }
-        return result
     }
 
-    private fun getConnection(): Connection {
-        val url = "jdbc:postgresql://localhost:5432/sparkservice"
-        val props = Properties()
-        props.setProperty("user", "sparkuser")
-        props.setProperty("password", "password")
-        return DriverManager.getConnection(url, props)
+    fun getAllAccounts(): List<Account>? {
+        var accounts:List<Account>? = null
+        transaction {
+            logger.addLogger(StdOutSqlLogger)
+            val accountsDBList = AccountDB.all().asSequence().toList()
+            accounts = accountsDBList.map { accountDB ->
+                Account(name = accountDB.name, id = accountDB.id.value)
+            }.asSequence().toList()
+        }
+        return accounts
+    }
+
+    fun updateAccount(id: Int, name : String) {
+        transaction {
+            logger.addLogger(StdOutSqlLogger)
+            val accountDB = AccountDB.findById(id)
+            accountDB?.name = name
+        }
+    }
+
+    fun deleteAccount(id: Int) {
+        transaction {
+            logger.addLogger(StdOutSqlLogger)
+            AccountDB.findById(id)?.delete()
+        }
     }
 }

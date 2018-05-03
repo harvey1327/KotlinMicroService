@@ -6,47 +6,47 @@ import spark.Spark.*
 
 fun main(args: Array<String>) {
 
-    val userDao = UserDao()
     val gson = Gson()
 
-    get("/testpost") {_, _ ->
-        PlsqlDAO().insertIntoTable()
+//    get("/testpost") {_, res ->
+//        PlsqlDAO().connection()
+//        PlsqlDAO().insertAccount()
+//        res.status(200)
+//    }
+
+    get("/account/all") {_, res ->
+        PlsqlDAO().connection()
+        val acc = PlsqlDAO().getAllAccounts()
+        gson.toJson(acc)
     }
 
-    get("/testselect") {_, _ ->
-        val user = PlsqlDAO().getUser()
-        gson.toJson(user)
-    }
-
-    get("/user/id/:id") { req, _ ->
-        val user = userDao.getById(req.params("id").toInt())
-        if (user !=null) gson.toJson(user) else "{\"message\":\"User does not exist\"}"
-    }
-
-    get("/user/all") { _, _ ->
-        val users = userDao.getAllUsers()
-        gson.toJson(users)
-    }
-    post("/user/create") { req, res ->
-        userDao.post(
-                name = req.queryParams("name"),
-                email = req.queryParams("email"))
+    post("/account/create") { req, res ->
+        PlsqlDAO().connection()
+        PlsqlDAO().createAccount(
+                name = req.queryParams("name")
+        )
         res.status(201)
     }
 
-    patch("/user/update/:id") { req, res ->
-        userDao.put(
-                id = req.params("id").toInt(),
-                name = req.queryParams("name"),
-                email = req.queryParams("email")
-        )
-        res.status(200)
+    delete("/account/delete/:id") { req, res ->
+        PlsqlDAO().connection()
+        PlsqlDAO().deleteAccount(req.params("id").toInt())
+        res.status(201)
     }
 
-    delete("/user/delete/:id") { req, res ->
-        userDao.delete(req.params("id").toInt())
-        res.status(200)
+    patch("/account/update/:id") { req, res ->
+        PlsqlDAO().connection()
+        PlsqlDAO().updateAccount(
+                id = req.params("id").toInt(),
+                name = req.params("name")
+        )
+        res.status(201)
     }
+
+//    get("/user/id/:id") { req, _ ->
+//        val user = userDao.getById(req.params("id").toInt())
+//        if (user !=null) gson.toJson(user) else "{\"message\":\"User does not exist\"}"
+//    }
 
     notFound { _, _ ->
         "{\"message\":\"Custom 404\"}"
