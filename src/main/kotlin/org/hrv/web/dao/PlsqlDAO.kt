@@ -21,7 +21,7 @@ class PlsqlDAO {
     }
 
     fun connection() = Database.connect(
-            url = "jdbc:postgresql://localhost:5432/sparkservice",
+            url = "jdbc:postgresql://sparkdb:5432/sparkservice",
             driver = "org.postgresql.Driver",
             user = "sparkuser",
             password = "password"
