@@ -1,0 +1,14 @@
+version: '3.6'
+services:
+  sparkdb:
+    build: ./postgres
+    image: sparkdb:latest
+    volumes:
+      - /tmp/sparkdb:/var/lib/postgresql/data
+  sparkservice:
+    build: .
+    image: sparkservice:latest
+    ports:
+      - "4567:4567"
+    depends_on:
+      - sparkdb
