@@ -2,51 +2,41 @@ package org.hrv.web
 
 import com.google.gson.Gson
 import org.hrv.web.dao.PlsqlDAO
+import org.hrv.web.domain.Account
 import spark.Spark.*
 
 fun main(args: Array<String>) {
 
     val gson = Gson()
 
-//    get("/testpost") {_, res ->
-//        PlsqlDAO().connection()
-//        PlsqlDAO().insertAccount()
-//        res.status(200)
-//    }
+    fun jsonToAccount(json: String): Account = gson.fromJson(json, Account::class.java)
 
-    get("/account/all") {_, res ->
+    get("/account/all") { _, _ ->
         PlsqlDAO().connection()
         val acc = PlsqlDAO().getAllAccounts()
         gson.toJson(acc)
     }
 
-    post("/account/create") { req, res ->
+    post("/account/create") { req, _ ->
         PlsqlDAO().connection()
-        PlsqlDAO().createAccount(
-                name = req.queryParams("name")
-        )
-        res.status(201)
+        PlsqlDAO().createAccount(name = jsonToAccount(req.body()).name)
+        "{\"message\" : \"Posted successfully\"}"
     }
 
-    delete("/account/delete/:id") { req, res ->
+    delete("/account/delete") { req, _ ->
         PlsqlDAO().connection()
-        PlsqlDAO().deleteAccount(req.params("id").toInt())
-        res.status(201)
+        PlsqlDAO().deleteAccount(id = jsonToAccount(req.body()).id)
+        "{\"message\" : \"Deleted successfully\"}"
     }
 
-    patch("/account/update/:id") { req, res ->
+    patch("/account/update") { req, _ ->
         PlsqlDAO().connection()
         PlsqlDAO().updateAccount(
-                id = req.params("id").toInt(),
-                name = req.params("name")
+                id = jsonToAccount(req.body()).id,
+                name = jsonToAccount(req.body()).name
         )
-        res.status(201)
+        "{\"message\" : \"Patched successfully\"}"
     }
-
-//    get("/user/id/:id") { req, _ ->
-//        val user = userDao.getById(req.params("id").toInt())
-//        if (user !=null) gson.toJson(user) else "{\"message\":\"User does not exist\"}"
-//    }
 
     notFound { _, _ ->
         "{\"message\":\"Custom 404\"}"
