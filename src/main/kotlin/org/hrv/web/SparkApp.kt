@@ -17,6 +17,13 @@ fun main(args: Array<String>) {
         gson.toJson(acc)
     }
 
+    get("/account/:id") {req, _ ->
+        val id = req.params("id").toInt()
+        PlsqlDAO().connection()
+        val acc = PlsqlDAO().getAccountById(id)
+        gson.toJson(acc)
+    }
+
     post("/account/create") { req, _ ->
         PlsqlDAO().connection()
         PlsqlDAO().createAccount(name = jsonToAccount(req.body()).name)
