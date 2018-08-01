@@ -37,6 +37,18 @@ class PlsqlDAO {
         }
     }
 
+    fun getAccountById(id: Int): Account? {
+        var account:Account? = null
+        transaction {
+            logger.addLogger(StdOutSqlLogger)
+            var name = AccountDB.findById(id)?.name
+            if(name != null){
+                account = Account(name = name, id = id)
+            }
+        }
+        return account
+    }
+
     fun getAllAccounts(): List<Account>? {
         var accounts:List<Account>? = null
         transaction {

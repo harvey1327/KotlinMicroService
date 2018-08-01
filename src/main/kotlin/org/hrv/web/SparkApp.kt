@@ -17,6 +17,13 @@ fun main(args: Array<String>) {
         gson.toJson(acc)
     }
 
+    get("/account/:id") {req, _ ->
+        val id = req.params("id").toInt()
+        PlsqlDAO().connection()
+        val acc = PlsqlDAO().getAccountById(id)
+        gson.toJson(acc)
+    }
+
     post("/account/create") { req, _ ->
         PlsqlDAO().connection()
         PlsqlDAO().createAccount(name = jsonToAccount(req.body()).name)
@@ -26,14 +33,15 @@ fun main(args: Array<String>) {
     delete("/account/delete") { req, _ ->
         PlsqlDAO().connection()
         PlsqlDAO().deleteAccount(id = jsonToAccount(req.body()).id)
-        "{\"message\" : \"Deleted successfully\"}"
+        "{\"message\" : \"Deleted successfully ${jsonToAccount(req.body()).id}\"}"
     }
 
     patch("/account/update") { req, _ ->
         PlsqlDAO().connection()
+        val account: Account = jsonToAccount(req.body())
         PlsqlDAO().updateAccount(
-                id = jsonToAccount(req.body()).id,
-                name = jsonToAccount(req.body()).name
+                id = account.id,
+                name = account.name
         )
         "{\"message\" : \"Patched successfully\"}"
     }

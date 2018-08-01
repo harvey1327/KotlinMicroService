@@ -8,6 +8,9 @@ MicroService to be written with spark framework and kotlin
 ```
 http://localhost:4567/account/all
 curl localhost:4567/account/all
+
+http://localhost:4567/account/1
+curl localhost:4567/account/1
 ```
 ### Post
 ```
