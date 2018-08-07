@@ -49,8 +49,8 @@ class PlsqlDAO {
         return account
     }
 
-    fun getAllAccounts(): List<Account>? {
-        var accounts:List<Account>? = null
+    fun getAllAccounts(): List<Account> {
+        var accounts:List<Account> = ArrayList()
         transaction {
             logger.addLogger(StdOutSqlLogger)
             val accountsDBList = AccountDB.all().asSequence().toList()
