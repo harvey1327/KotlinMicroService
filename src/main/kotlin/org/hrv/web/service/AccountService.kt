@@ -1,4 +1,4 @@
-package org.hrv.web.dao
+package org.hrv.web.service
 
 import org.hrv.web.domain.Account
 import org.jetbrains.exposed.dao.EntityID
@@ -9,7 +9,7 @@ import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.StdOutSqlLogger
 import org.jetbrains.exposed.sql.transactions.transaction
 
-class PlsqlDAO {
+class AccountService {
 
     object Accounts : IntIdTable() {
         val name = varchar("name", 50)
@@ -37,7 +37,7 @@ class PlsqlDAO {
         }
     }
 
-    fun getAccountById(id: Int): Account? {
+    fun getAccountById(id: Int?): Account? {
         var account:Account? = null
         transaction {
             logger.addLogger(StdOutSqlLogger)
