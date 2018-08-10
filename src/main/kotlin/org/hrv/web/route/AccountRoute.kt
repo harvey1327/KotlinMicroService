@@ -12,33 +12,33 @@ fun Route.accountRoute(accountService: AccountService){
     route("/account") {
 
         get("/all"){
-            accountService.connection()
+//            accountService.connection()
             val accounts = accountService.getAllAccounts()
             call.respond(accounts)
         }
 
         get("/{id}"){
             val id = call.parameters["id"]?.toInt()
-            accountService.connection()
+//            accountService.connection()
             val account = accountService.getAccountById(id)
             call.respond(account)
         }
 
         post("/create"){
-            accountService.connection()
+//            accountService.connection()
             val account = call.receive<Account>()
             call.respond(accountService.createAccount(account))
         }
 
         put("/update"){
-            accountService.connection()
+//            accountService.connection()
             val account = call.receive<Account>()
             call.respond(accountService.updateAccount(account))
         }
 
         delete("/delete/{id}"){
             val id = call.parameters["id"]?.toInt()
-            accountService.connection()
+//            accountService.connection()
             call.respond(accountService.deleteAccount(id))
         }
     }

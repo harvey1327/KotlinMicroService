@@ -20,12 +20,12 @@ class AccountService {
         var name by Accounts.name
     }
 
-    fun connection() = Database.connect(
-            url = "jdbc:postgresql://sparkdb:5432/sparkservice",
-            driver = "org.postgresql.Driver",
-            user = "sparkuser",
-            password = "password"
-    )
+//    fun connection() = Database.connect(
+//            url = "jdbc:postgresql://sparkdb:5432/sparkservice",
+//            driver = "org.postgresql.Driver",
+//            user = "sparkuser",
+//            password = "password"
+//    )
 
     fun createAccount(name: String) {
         transaction {
