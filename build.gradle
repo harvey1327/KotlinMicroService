@@ -30,6 +30,7 @@ sourceSets {
 kotlin { experimental { coroutines "enable" } }
 
 dependencies {
+    compile 'com.zaxxer:HikariCP:3.1.0'
     compile "io.ktor:ktor-gson:$ktor_version"
     compile 'org.jetbrains.exposed:exposed:0.10.2'
     compile 'org.postgresql:postgresql:42.2.2'
