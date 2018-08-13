@@ -1,6 +1,7 @@
 package org.hrv.web.route
 
 import io.ktor.application.call
+import io.ktor.http.HttpStatusCode
 import io.ktor.request.receive
 import io.ktor.response.respond
 import io.ktor.routing.*
@@ -11,34 +12,35 @@ fun Route.accountRoute(accountService: AccountService){
 
     route("/account") {
 
+        val notFound = "{ 'message' : 'Not Found' }"
+
         get("/all"){
-//            accountService.connection()
             val accounts = accountService.getAllAccounts()
             call.respond(accounts)
         }
 
         get("/{id}"){
-            val id = call.parameters["id"]?.toInt()
-//            accountService.connection()
+            val id = call.parameters["id"]!!.toInt()
             val account = accountService.getAccountById(id)
-            call.respond(account)
+            if(account == null){
+                call.respond(HttpStatusCode.NotFound, notFound)
+            } else {
+                call.respond(account)
+            }
         }
 
         post("/create"){
-//            accountService.connection()
             val account = call.receive<Account>()
             call.respond(accountService.createAccount(account))
         }
 
         put("/update"){
-//            accountService.connection()
             val account = call.receive<Account>()
             call.respond(accountService.updateAccount(account))
         }
 
         delete("/delete/{id}"){
             val id = call.parameters["id"]?.toInt()
-//            accountService.connection()
             call.respond(accountService.deleteAccount(id))
         }
     }
