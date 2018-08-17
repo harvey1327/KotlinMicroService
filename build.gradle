@@ -5,17 +5,20 @@ buildscript {
 
     repositories {
         mavenCentral()
+        jcenter()
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.4'
     }
 }
 
-group 'com.hrv'
-version '1.0-SNAPSHOT'
+//group 'com.hrv.web'
+//version '1.0-SNAPSHOT'
 
+apply plugin: 'com.github.johnrengelman.shadow'
 apply plugin: 'kotlin'
-//apply plugin: 'application'
+apply plugin: 'application'
 
 repositories {
     mavenCentral()
@@ -26,6 +29,7 @@ repositories {
 
 sourceSets {
     main.kotlin.srcDirs += 'src/main/kotlin'
+    main.resources.srcDirs +='src/main/resources'
 }
 
 kotlin { experimental { coroutines "enable" } }
@@ -41,10 +45,17 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
 
-jar {
-    manifest {
-        attributes 'Main-Class': 'org.hrv.web.SparkAppKt'
-    }
+mainClassName = 'io.ktor.server.netty.DevelopmentEngine'
 
-    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+shadowJar {
+    baseName = 'sparkService'
+    classifier = null
+    version = null
 }
+//jar {
+//    manifest {
+//        attributes 'Main-Class': 'io.ktor.server.netty.DevelopmentEngine'
+//    }
+//
+//    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+//}
