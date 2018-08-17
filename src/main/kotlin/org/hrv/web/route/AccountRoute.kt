@@ -36,11 +36,16 @@ fun Route.accountRoute(accountService: AccountService){
 
         put("/update"){
             val account = call.receive<Account>()
-            call.respond(accountService.updateAccount(account))
+            val updatedAccount = accountService.updateAccount(account)
+            if (updatedAccount == null) {
+                call.respond(HttpStatusCode.NotFound, notFound)
+            } else {
+                call.respond(updatedAccount)
+            }
         }
 
         delete("/delete/{id}"){
-            val id = call.parameters["id"]?.toInt()
+            val id = call.parameters["id"]!!.toInt()
             call.respond(accountService.deleteAccount(id))
         }
     }
