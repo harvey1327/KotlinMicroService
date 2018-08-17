@@ -13,9 +13,9 @@ import org.hrv.web.route.accountRoute
 import org.hrv.web.service.AccountService
 import org.hrv.web.service.DatabaseFactory
 
-fun main(args: Array<String>){
-    embeddedServer(Netty, port = 8080, watchPaths = listOf("KotlinApp"), module = Application::accountModule).start()
-}
+//fun main(args: Array<String>){
+//    embeddedServer(Netty, port = 8080, watchPaths = listOf("KotlinApp"), module = Application::accountModule).start()
+//}
 
 fun Application.accountModule(){
     install(DefaultHeaders)
