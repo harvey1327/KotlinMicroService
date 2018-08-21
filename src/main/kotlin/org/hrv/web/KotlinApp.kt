@@ -21,7 +21,7 @@ fun main(args: Array<String>){
     } else {
         println("Not A file")
     }
-//    DatabaseFactory.init()
+    DatabaseFactory.init()
 }
 
 fun Application.accountModule(){

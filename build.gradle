@@ -1,5 +1,5 @@
 buildscript {
-    ext.kotlin_version = '1.2.60'
+    ext.kotlin_version = '1.2.61'
     ext.ktor_version = '0.9.3'
     ext.exposed_version = '0.10.4'
 
@@ -28,8 +28,8 @@ repositories {
 }
 
 sourceSets {
-    main.kotlin.srcDirs += 'src/main/kotlin'
-    main.resources.srcDirs +='src/main/resources'
+    main.kotlin.srcDirs = ['src/main/kotlin']
+    main.resources.srcDirs = ['src/main/resources']
 }
 
 kotlin { experimental { coroutines "enable" } }
@@ -48,7 +48,7 @@ dependencies {
 mainClassName = 'io.ktor.server.netty.DevelopmentEngine'
 
 shadowJar {
-    baseName = 'sparkService'
+    baseName = 'ktorService'
     classifier = null
     version = null
 }
