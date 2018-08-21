@@ -10,17 +10,8 @@ import io.ktor.routing.*
 import org.hrv.web.route.accountRoute
 import org.hrv.web.service.AccountService
 import org.hrv.web.service.DatabaseFactory
-import java.io.File
-import java.io.FileInputStream
 
 fun main(args: Array<String>){
-    val propFile = File("application.conf")
-    if(propFile.isFile){
-        val stream = FileInputStream(propFile)
-        println(stream)
-    } else {
-        println("Not A file")
-    }
     DatabaseFactory.init()
 }
 

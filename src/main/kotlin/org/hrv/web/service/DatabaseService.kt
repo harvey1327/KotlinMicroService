@@ -15,15 +15,7 @@ object DatabaseFactory {
     }
 
     private fun hikari(): HikariDataSource {
-        val config = HikariConfig("hikari.properties")
-//        config.driverClassName = "org.postgresql.Driver"
-//        config.jdbcUrl = "jdbc:postgresql://ktordb:5432/ktorservice"
-//        config.maximumPoolSize = 3
-//        config.isAutoCommit = true
-//        config.transactionIsolation = "TRANSACTION_REPEATABLE_READ"
-//        config.username = "ktoruser"
-//        config.password = "password"
-        config.validate()
+        val config = HikariConfig("src/main/resources/hikari.properties")
         return HikariDataSource(config)
     }
 
