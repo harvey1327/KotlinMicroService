@@ -17,11 +17,11 @@ object DatabaseFactory {
     private fun hikari(): HikariDataSource {
         val config = HikariConfig()
         config.driverClassName = "org.postgresql.Driver"
-        config.jdbcUrl = "jdbc:postgresql://sparkdb:5432/sparkservice"
+        config.jdbcUrl = "jdbc:postgresql://ktordb:5432/ktorservice"
         config.maximumPoolSize = 3
         config.isAutoCommit = true
         config.transactionIsolation = "TRANSACTION_REPEATABLE_READ"
-        config.username = "sparkuser"
+        config.username = "ktoruser"
         config.password = "password"
         config.validate()
         return HikariDataSource(config)

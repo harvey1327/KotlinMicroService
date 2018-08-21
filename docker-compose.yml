@@ -1,14 +1,14 @@
 version: '3.6'
 services:
-  sparkdb:
+  ktordb:
     build: ./postgres
-    image: sparkdb:latest
+    image: ktordb:latest
     volumes:
-      - /tmp/sparkdb:/var/lib/postgresql/data
-  sparkservice:
+      - /tmp/ktordb:/var/lib/postgresql/data
+  ktorservice:
     build: .
-    image: sparkservice:latest
+    image: ktorservice:latest
     ports:
       - "4567:4567"
     depends_on:
-      - sparkdb
+      - ktordb
