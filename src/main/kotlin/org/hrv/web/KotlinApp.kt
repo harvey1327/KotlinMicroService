@@ -11,10 +11,6 @@ import org.hrv.web.route.accountRoute
 import org.hrv.web.service.AccountService
 import org.hrv.web.service.DatabaseFactory
 
-fun main(args: Array<String>){
-    DatabaseFactory.init()
-}
-
 fun Application.accountModule(){
     install(DefaultHeaders)
     install(CallLogging)

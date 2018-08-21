@@ -15,7 +15,7 @@ object DatabaseFactory {
     }
 
     private fun hikari(): HikariDataSource {
-        val config = HikariConfig("src/main/resources/hikari.properties")
+        val config = HikariConfig("hikari.properties")
         return HikariDataSource(config)
     }
 
