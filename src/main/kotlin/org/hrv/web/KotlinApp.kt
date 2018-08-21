@@ -7,15 +7,22 @@ import io.ktor.features.ContentNegotiation
 import io.ktor.features.DefaultHeaders
 import io.ktor.gson.gson
 import io.ktor.routing.*
-import io.ktor.server.engine.embeddedServer
-import io.ktor.server.netty.Netty
 import org.hrv.web.route.accountRoute
 import org.hrv.web.service.AccountService
 import org.hrv.web.service.DatabaseFactory
+import java.io.File
+import java.io.FileInputStream
 
-//fun main(args: Array<String>){
-//    embeddedServer(Netty, port = 8080, watchPaths = listOf("KotlinApp"), module = Application::accountModule).start()
-//}
+fun main(args: Array<String>){
+    val propFile = File("application.conf")
+    if(propFile.isFile){
+        val stream = FileInputStream(propFile)
+        println(stream)
+    } else {
+        println("Not A file")
+    }
+//    DatabaseFactory.init()
+}
 
 fun Application.accountModule(){
     install(DefaultHeaders)
