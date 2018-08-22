@@ -4,6 +4,7 @@ import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import kotlinx.coroutines.experimental.newFixedThreadPoolContext
 import kotlinx.coroutines.experimental.withContext
+import org.hrv.web.utils.LoadProperties
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.transactions.transaction
 import kotlin.coroutines.experimental.CoroutineContext
@@ -21,7 +22,8 @@ object DatabaseFactory {
     }
 
     private fun hikari(): HikariDataSource {
-        val config = HikariConfig("hikari.properties")
+        val properties = LoadProperties("hikari.properties")
+        val config = HikariConfig(properties)
         return HikariDataSource(config)
     }
 

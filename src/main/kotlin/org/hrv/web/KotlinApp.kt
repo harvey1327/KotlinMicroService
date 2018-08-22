@@ -10,7 +10,6 @@ import io.ktor.routing.*
 import org.hrv.web.route.accountRoute
 import org.hrv.web.service.AccountService
 import org.hrv.web.service.DatabaseFactory
-import org.hrv.web.utils.HikariProperties
 
 fun Application.accountModule(){
     install(DefaultHeaders)
@@ -24,6 +23,5 @@ fun Application.accountModule(){
         accountRoute(AccountService())
     }
 
-//    DatabaseFactory.init()
-    HikariProperties().init()
+    DatabaseFactory.init()
 }
