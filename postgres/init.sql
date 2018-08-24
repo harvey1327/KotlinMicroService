@@ -1,5 +1,5 @@
-GRANT ALL PRIVILEGES ON DATABASE sparkservice TO sparkuser;
-CREATE TABLE accounts(
+GRANT ALL PRIVILEGES ON DATABASE ktorservice TO ktoruser;
+CREATE TABLE account(
 "id" serial PRIMARY KEY,
 "name" VARCHAR (50) NOT NULL
 );
