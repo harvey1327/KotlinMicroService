@@ -27,7 +27,7 @@ curl --header "Content-Type: application/json" --request PUT --data '{ "name" : 
 http://localhost:4567/account/delete/1
 curl --header "Content-Type: application/json" --request DELETE localhost:4567/account/delete/1
 ```
-##Running App
+### Running App
 ```
 ./gradlew clean build
 docker-compose up ktordb (wait for connection to be stable as ktorservice will fail otherwise, should probably sort this at some point)
