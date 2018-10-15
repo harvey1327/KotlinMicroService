@@ -5,7 +5,7 @@ import io.ktor.http.HttpStatusCode
 import io.ktor.request.receive
 import io.ktor.response.respond
 import io.ktor.routing.*
-import org.hrv.web.domain.Account
+import org.hrv.web.domain.WriteAccount
 import org.hrv.web.service.AccountService
 
 fun Route.accountRoute(accountService: AccountService){
@@ -30,13 +30,14 @@ fun Route.accountRoute(accountService: AccountService){
         }
 
         post("/create"){
-            val account = call.receive<Account>()
+            val account = call.receive<WriteAccount>()
             call.respond(accountService.createAccount(account))
         }
 
-        put("/update"){
-            val account = call.receive<Account>()
-            val updatedAccount = accountService.updateAccount(account)
+        put("/{id}"){
+            val account = call.receive<WriteAccount>()
+            val id = call.parameters["id"]!!.toInt()
+            val updatedAccount = accountService.updateAccount(account, id)
             if (updatedAccount == null) {
                 call.respond(HttpStatusCode.NotFound, notFound)
             } else {
@@ -44,7 +45,7 @@ fun Route.accountRoute(accountService: AccountService){
             }
         }
 
-        delete("/delete/{id}"){
+        delete("/{id}"){
             val id = call.parameters["id"]!!.toInt()
             call.respond(accountService.deleteAccount(id))
         }
