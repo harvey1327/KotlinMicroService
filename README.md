@@ -20,12 +20,12 @@ curl --header "Content-Type: application/json" --request POST --data '{ "name" :
 ### Put
 ```
 http://localhost:4567/account/update/
-curl --header "Content-Type: application/json" --request PUT --data '{ "name" : "AccountOne", "id" : "1" }' localhost:4567/account/update
+curl --header "Content-Type: application/json" --request PUT --data '{ "name" : "AccountThree" }' localhost:4567/account/1
 ```
 ### Delete
 ```
 http://localhost:4567/account/delete/1
-curl --header "Content-Type: application/json" --request DELETE localhost:4567/account/delete/1
+curl --header "Content-Type: application/json" --request DELETE localhost:4567/account/1
 ```
 ### Running App
 ```
