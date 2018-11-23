@@ -10,7 +10,7 @@ import io.ktor.request.path
 import io.ktor.routing.*
 import org.hrv.web.route.accountRoute
 import org.hrv.web.service.AccountService
-import org.hrv.web.service.DatabaseFactory
+import org.hrv.web.service.database.DataBaseService
 import org.slf4j.event.Level
 
 fun Application.accountModule(){
@@ -28,5 +28,5 @@ fun Application.accountModule(){
         accountRoute(AccountService())
     }
 
-    DatabaseFactory.init()
+    DataBaseService().startDataBase()
 }
