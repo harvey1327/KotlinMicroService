@@ -1,6 +1,11 @@
 # Kotlin Ktor with Expose
 
-MicroService to be written with ktor framework and kotlin, postgreSQL database used with Expose
+MicroService written in Kotlin, makes use of:
+* __Ktor__ for micro-framework
+* __MockK__ for use in unit testing
+* __Exposed__ for SQL Library
+* __HikariCP__ for JDBC Connection pooling
+* __PostgreSQL__ as service database
 
 ## Working endpoints:
 
