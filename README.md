@@ -1,4 +1,4 @@
-# Kotlin Ktor with Expose
+# Kotlin MicroService
 
 MicroService written in Kotlin, makes use of:
 * __Ktor__ for micro-framework
