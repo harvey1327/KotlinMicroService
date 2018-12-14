@@ -6,6 +6,7 @@ MicroService written in Kotlin, makes use of:
 * __Exposed__ for SQL Library
 * __HikariCP__ for JDBC Connection pooling
 * __PostgreSQL__ as service database
+* __Docker__ to run service and database in different containers
 
 ## Working endpoints:
 
