@@ -14,6 +14,9 @@ import org.hrv.web.service.database.DataBaseService
 import org.slf4j.event.Level
 
 fun Application.accountModule(){
+
+    val dataBaseService = DataBaseService()
+
     install(DefaultHeaders)
     install(CallLogging) {
         level = Level.INFO
@@ -25,8 +28,8 @@ fun Application.accountModule(){
         }
     }
     install(Routing){
-        accountRoute(AccountService())
+        accountRoute(AccountService(dataBaseService))
     }
 
-    DataBaseService().startDataBase()
+    dataBaseService.startDataBase()
 }
