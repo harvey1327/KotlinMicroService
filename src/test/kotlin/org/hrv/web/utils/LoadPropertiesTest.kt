@@ -1,6 +1,6 @@
 package org.hrv.web.utils
 
-import org.junit.jupiter.api.Test
+import org.junit.Test
 
 class LoadPropertiesTest {
 
