@@ -1,33 +1,18 @@
 package org.hrv.web.service
 
-import org.hrv.web.domain.AccountTable
 import org.hrv.web.domain.ReadAccount
 import org.hrv.web.domain.WriteAccount
-import org.hrv.web.service.DatabaseFactory.dbQuery
-import org.jetbrains.exposed.sql.*
+import org.hrv.web.service.database.DataBaseService
 
-class AccountService {
+class AccountService(private val dataBaseService: DataBaseService) {
 
-    suspend fun getAllAccounts(): List<ReadAccount> = dbQuery { AccountTable.selectAll().map { toAccount(it) } }
+    suspend fun getAllAccounts(): List<ReadAccount> = dataBaseService.getAllAccounts()
 
-    suspend fun getAccountById(id: Int): ReadAccount? = dbQuery { AccountTable.select { AccountTable.id eq id }.mapNotNull { toAccount(it) }.singleOrNull() }
+    suspend fun getAccountById(id: Int): ReadAccount? = dataBaseService.getAccountById(id)
 
-    suspend fun createAccount(account: WriteAccount): ReadAccount {
-        var key: Int = -1
-        dbQuery {
-            key = (AccountTable.insert { it[name] = account.name } get AccountTable.id)!!
-        }
-        return getAccountById(key)!!
-    }
+    suspend fun createAccount(account: WriteAccount): ReadAccount = dataBaseService.createAccount(account)
 
-    suspend fun updateAccount(account: WriteAccount, id: Int): ReadAccount? {
-        dbQuery {
-            AccountTable.update({AccountTable.id eq id}) { it[name] = account.name }
-        }
-        return getAccountById(id)
-    }
+    suspend fun updateAccount(account: WriteAccount, id: Int): ReadAccount? = dataBaseService.updateAccount(account, id)
 
-    suspend fun deleteAccount(id: Int): Boolean = dbQuery { AccountTable.deleteWhere { AccountTable.id eq id } > 0 }
-
-    private fun toAccount(row: ResultRow): ReadAccount = ReadAccount(row[AccountTable.name], row[AccountTable.id])
+    suspend fun deleteAccount(id: Int): Boolean = dataBaseService.deleteAccount(id)
 }

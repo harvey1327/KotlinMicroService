@@ -1,4 +1,4 @@
-package org.hrv.web.service
+package org.hrv.web.service.database
 
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
