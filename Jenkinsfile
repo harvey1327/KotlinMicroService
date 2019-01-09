@@ -1,4 +1,6 @@
 node {
+  currentBuild.displayName = "Branch Name Here"
+
   stage('Checkout'){
     checkout scm
   }
