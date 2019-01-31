@@ -1,6 +1,6 @@
 pipeline {
   environment {
-    jobName = ${env.JOB_NAME}
+    jobName = "${env.JOB_NAME}"
   }
   agent any
   triggers {
@@ -19,8 +19,9 @@ pipeline {
     // }
     stage('TODO: Build Docker Image') {
       steps {
-        echo "Building Docker Image"
-        docker.build("$jobName:latest")
+        script {
+          docker.build("$jobName:latest")
+        }
       }
     }
     stage('TODO: Deploy Image to K8 env') {
