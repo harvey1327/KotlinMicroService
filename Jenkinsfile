@@ -1,7 +1,7 @@
 pipeline {
   agent none
   triggers {
-    periodic(5)
+    pollSCM('H/15 * * * *')
   }
   stages {
     stage('Checkout Project') {
