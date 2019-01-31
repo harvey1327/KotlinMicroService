@@ -9,14 +9,15 @@ pipeline {
         checkout scm
       }
     }
-    stage('Build with Gradlew') {
-      steps {
-        sh './gradlew clean build'
-      }
-    }
+    // stage('Build with Gradlew') {
+    //   steps {
+    //     sh './gradlew clean build'
+    //   }
+    // }
     stage('TODO: Build Docker Image') {
       steps {
         echo "Building Docker Image"
+        docker.build("${env.JOB_NAME}:latest")
       }
     }
     stage('TODO: Deploy Image to K8 env') {
