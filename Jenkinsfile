@@ -1,4 +1,7 @@
 pipeline {
+  environment {
+    jobName = ${env.JOB_NAME}
+  }
   agent any
   triggers {
     pollSCM('H/15 * * * *')
@@ -17,7 +20,7 @@ pipeline {
     stage('TODO: Build Docker Image') {
       steps {
         echo "Building Docker Image"
-        docker.build("${env.JOB_NAME}:latest")
+        docker.build("$jobName:latest")
       }
     }
     stage('TODO: Deploy Image to K8 env') {
