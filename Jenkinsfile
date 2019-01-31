@@ -1,6 +1,8 @@
 node {
-  currentBuild.displayName = "Branch Name Here"
 
+  triggers{
+    periodic(5)
+  }
   stage('Checkout Project'){
     checkout scm
   }
