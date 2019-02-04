@@ -17,11 +17,9 @@ pipeline {
     //     sh './gradlew clean build'
     //   }
     // }
-    stage('TODO: Build Docker Image') {
+    stage('Build Docker Image') {
       steps {
-        script {
-          docker.build("$jobName:latest")
-        }
+        sh "sudo docker build . -t $jobName:latest"
       }
     }
     stage('TODO: Deploy Image to K8 env') {
