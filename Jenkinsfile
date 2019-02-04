@@ -12,11 +12,11 @@ pipeline {
         checkout scm
       }
     }
-    // stage('Build with Gradlew') {
-    //   steps {
-    //     sh './gradlew clean build'
-    //   }
-    // }
+    stage('Build with Gradlew') {
+      steps {
+        sh './gradlew clean build'
+      }
+    }
     stage('Build Docker Image') {
       steps {
         sh "sudo docker build . -t $jobName:latest"
