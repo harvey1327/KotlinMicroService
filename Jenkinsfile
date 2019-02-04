@@ -1,6 +1,6 @@
 pipeline {
   environment {
-    jobName = "${env.JOB_NAME}"
+    jobName = "${env.JOB_NAME}".toLowerCase()
   }
   agent any
   triggers {
