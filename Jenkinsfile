@@ -1,4 +1,7 @@
 pipeline {
+  environment {
+    jobName = "${env.JOB_NAME}".toLowerCase()
+  }
   agent any
   triggers {
     pollSCM('H/15 * * * *')
@@ -14,9 +17,9 @@ pipeline {
         sh './gradlew clean build'
       }
     }
-    stage('TODO: Build Docker Image') {
+    stage('Build Docker Image') {
       steps {
-        echo "Building Docker Image"
+        sh "sudo docker build . -t $jobName:latest"
       }
     }
     stage('TODO: Deploy Image to K8 env') {
